@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="نظام توقع كأس العالم 2026 🏆">
+<meta property="og:description" content="اضغط مطولاً وشغّل النظام لمعرفة من سيفوز في المواجهات الحاسمة!">
+<meta property="og:image" content="رابط_صورة_مصغرة_لمشروعك.png">
+<meta property="og:url" content="رابط_موقعك_هنا">
+<meta name="theme-color" content="#d32f2f">
+  <title>نظام توقع كأس العالم 2026 - البث المباشر</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="logo-container">
+    <img src="boom-logo.png" alt="Boom Prediction Logo" id="appLogo">
+  </div>
+  
+  <div class="lang-toggle-container">
+    <span class="lang-label" id="labelEn">EN</span>
+    <label class="switch">
+      <input type="checkbox" id="langToggle" checked>
+      <span class="slider round"></span>
+    </label>
+    <span class="lang-label active" id="labelAr">عربي</span>
+  </div>
+  
+  <h1 class="main-title">من سيفوز؟</h1>
+  
+  <select id="matchSelector" class="cinematic-select" style="display: none;"></select>
+  
+  <div class="system-container" id="systemBox">
+    <div class="match-display">
+      <div class="team-block" id="block1">
+        <img src="" alt="Flag" class="team-flag" id="flag1">
+        <span class="team-name" id="team1">--</span>
+      </div>
+      
+      <span class="vs-badge">VS</span>
+      
+      <div class="team-block" id="block2">
+        <img src="" alt="Flag" class="team-flag" id="flag2">
+        <span class="team-name" id="team2">--</span>
+      </div>
+    </div>
+    
+    <button class="btn-hold" id="holdBtn" oncontextmenu="return false;">اضغط مطولاً لبدء التحليل والتوقع</button>
+    
+    <div class="analysis-screen" id="statusScreen">[Initializing System...]</div>
+  </div>
+<!-- منطقة حقوق النشر (الفوتر) -->
+  <footer class="app-footer" id="copyrightFooter">
+    © 2026 جميع الحقوق محفوظة
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

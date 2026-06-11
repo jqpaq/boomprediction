@@ -1,0 +1,458 @@
+body {
+  background-color: #0a0a0a; /* أسود مطفي عميق */
+  color: #e0e0e0;
+  font-family: 'Cairo', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  /* 🔴 التعديلات السحرية هنا 🔴 */
+  min-height: 100vh; /* التغيير من height إلى min-height ليسمح للصفحة بالتمدد */
+  padding: 40px 0; /* مساحة تنفس علوية وسفلية للصفحة بأكملها */
+  margin: 0;
+  overflow-x: hidden; /* منع التمدد الأفقي فقط، والسماح بالتمرير العمودي براحة */
+  -webkit-touch-callout: none; /* يمنع ظهور قائمة الخيارات عند الضغط المطول في الآيفون */
+}
+  
+.main-title {
+  font-size: 4em;
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-shadow: 0 5px 20px rgba(211, 47, 47, 0.6);
+}
+
+.system-container {
+  text-align: center;
+  background: #121212;
+  padding: 50px 40px 70px 40px; /* 🔴 زيادة المساحة السفلية لحماية الزر */
+  border: 1px solid #333;
+  border-radius: 35px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.9);
+  transition: all 0.3s ease;
+  width: 85%;
+  max-width: 700px;
+  position: relative;
+  overflow: visible; /* 🔴 السماح للتوهج بالظهور خارج الحدود دون قص */
+}
+
+.match-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.team-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  transition: opacity 0.5s;
+  width: 200px;
+  justify-content: flex-start;
+}
+
+.team-flag {
+  width: 100px;
+  height: 65px;
+  object-fit: cover;
+  border: 1px solid #444;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.8);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.4s ease;
+  filter: grayscale(40%) contrast(120%);
+}
+
+.team-flag.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.team-flag.winner-flag {
+  filter: grayscale(0%) contrast(120%);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+  transform: scale(1.15);
+}
+
+.team-name {
+  font-size: 2.2em;
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.vs-badge { 
+  color: #d32f2f;
+  font-size: 1.5em; 
+  font-weight: 900;
+  margin-top: 15px;
+}
+
+.btn-hold {
+  background: #1a1a1a;
+  color: #d32f2f;
+  border: 2px solid #d32f2f;
+  border-radius: 15px;
+  padding: 15px 40px;
+  font-size: 1.3em;
+  font-family: 'Cairo', sans-serif;
+  cursor: pointer;
+  font-weight: 900;
+  transition: all 0.1s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.btn-hold:hover {
+  background: #2a0000;
+}
+
+.charging .btn-hold {
+  background: #d32f2f;
+  color: #121212;
+  box-shadow: 0 0 30px rgba(211, 47, 47, 0.8);
+  transform: scale(0.95);
+}
+
+.analysis-screen {
+  margin-top: 25px;
+  font-size: 1.1em;
+  min-height: 40px;
+  color: #888;
+  font-weight: 700;
+  direction: ltr;
+}
+
+.dramatic-shake {
+  animation: hardcore-shake 0.1s infinite;
+  border-color: #d32f2f;
+  box-shadow: inset 0 0 50px rgba(211, 47, 47, 0.2);
+}
+
+@keyframes hardcore-shake {
+  0% { transform: translate(2px, 1px) rotate(0deg); }
+  50% { transform: translate(-2px, -1px) rotate(-1deg); }
+  100% { transform: translate(1px, -2px) rotate(1deg); }
+}
+
+.winner-reveal {
+  font-size: 1.8em;
+  color: #ffffff;
+  font-weight: 900;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  direction: rtl;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* =========================================
+ استجابة شاشات الجوال (Mobile Responsiveness)
+ ========================================= */
+@media (max-width: 600px) {
+  /* 🔴 1. ضبط مستوى زر اللغة ليوازي الشعار */
+  .lang-toggle-container {
+    top: 25px; 
+    right: 15px;
+  }
+
+  /* 🔴 2. دفع العنوان للأسفل لحمايته من التداخل */
+  .main-title {
+    font-size: 2.2em;
+    margin-top: 80px; /* الحل السحري لإبعاد العنوان عن الشعار والزر */
+    margin-bottom: 15px;
+    text-shadow: 0 3px 15px rgba(211, 47, 47, 0.8);
+  }
+  
+  .logo-container {
+    top: 15px;
+    left: 15px;
+  }
+  
+  #appLogo {
+    width: 55px; 
+  }
+  
+  .system-container {
+    padding: 30px 15px 40px 15px; 
+    width: 90%;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.95);
+  }
+
+  .match-display {
+    gap: 10px; 
+    margin-bottom: 30px;
+  }
+
+  .team-block {
+    width: 120px;
+    gap: 10px;
+  }
+
+  .team-flag {
+    width: 75px;
+    height: 50px;
+  }
+
+  .team-name {
+    font-size: 1.4em;
+  }
+
+  .vs-badge {
+    font-size: 1.1em;
+    margin-top: 0;
+  }
+
+  .btn-hold {
+    padding: 15px 20px;
+    font-size: 1.1em;
+    width: 100%;
+    border-radius: 12px;
+    -webkit-touch-callout: none; 
+  }
+
+  .analysis-screen {
+    font-size: 0.9em;
+    margin-top: 20px;
+    min-height: 50px;
+  }
+
+  .winner-reveal {
+    font-size: 1.3em;
+  }
+  
+  .app-footer {
+    font-size: 0.8em;
+    padding: 15px 0 5px 0;
+  }
+}
+
+/* =========================================
+ تأثير شحن الطاقة للزر (متناسق مع الصوت)
+ ========================================= */
+.charging #holdBtn {
+  background-image: linear-gradient(to right, #b71c1c, #ff1744);
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  background-color: #141414;
+  
+  /* 🔴 تم تصحيح 19.0s ليتطابق التوهج مع الصوت تماماً */
+  animation: fillProgress 19.0s linear forwards, aggressiveVibrate 0.08s infinite;
+  
+  border-color: #ff1744;
+  box-shadow: 0 0 25px rgba(255, 23, 68, 0.7), 
+              0 0 50px rgba(183, 28, 28, 0.4),
+              inset 0 0 15px rgba(255, 23, 68, 0.5);
+  
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes fillProgress {
+  to { background-size: 100% 100%; }
+}
+
+@keyframes aggressiveVibrate {
+  0% { transform: scale(1.04) translate(0, 0); }
+  25% { transform: scale(1.04) translate(1px, -1px); }
+  50% { transform: scale(1.04) translate(-1px, 1px); }
+  75% { transform: scale(1.04) translate(1.5px, 1px); }
+  100% { transform: scale(1.04) translate(-1px, -1.5px); }
+}
+
+/* =========================================
+ قائمة اختيار المباريات (Cinematic Dropdown)
+ ========================================= */
+.cinematic-select {
+  width: 90%;
+  max-width: 400px;
+  margin: 15px auto 25px auto;
+  display: block;
+  padding: 12px 15px;
+  background-color: #111; 
+  color: #fff;
+  border: 2px solid #333;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1.1em;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+  appearance: none; 
+  -webkit-appearance: none;
+  text-align: center;
+}
+
+.cinematic-select:focus, .cinematic-select:hover {
+  border-color: #d32f2f;
+  box-shadow: 0 0 15px rgba(211, 47, 47, 0.4);
+}
+
+.cinematic-select option {
+  background-color: #1a1a1a;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* =========================================
+ مفتاح تبديل اللغة (Language Toggle)
+ ========================================= */
+.lang-toggle-container {
+  position: absolute;
+  top: 50px;
+  right: 25px; /* أو left: 25px إذا أردته على اليسار */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 100;
+  direction: ltr; /* الحفاظ على اتجاه المفتاح ثابتاً */
+}
+
+.lang-label {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #555;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.lang-label.active {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 54px;
+  height: 28px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #111;
+  border: 2px solid #333;
+  transition: .4s;
+  border-radius: 30px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #555;
+  transition: .4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* تأثير ارتداد حركي */
+  border-radius: 50%;
+}
+
+/* حالة تفعيل اللغة العربية (الزر مضغوط/أحمر) */
+input:checked + .slider {
+  border-color: #d32f2f;
+  box-shadow: inset 0 0 10px rgba(211, 47, 47, 0.2);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+  background-color: #d32f2f;
+  box-shadow: 0 0 10px #d32f2f;
+}
+
+/* =========================================
+ شعار النظام (Logo) وتأثير النبض
+ ========================================= */
+.logo-container {
+  position: absolute;
+  top: 20px;
+  left: 25px; /* التموضع في الزاوية اليسرى المقابلة لمفتاح اللغة */
+  z-index: 100;
+}
+
+#appLogo {
+  width: 250px; /* حجم الشعار (يمكنك تعديله لاحقاً حسب الصورة النهائية) */
+  height: auto;
+  /* التوهج المبدئي المحيط بتفاصيل الشعار */
+  filter: drop-shadow(0 0 10px rgba(211, 47, 47, 0.4));
+  /* تشغيل تأثير النبض المستمر */
+  animation: energyPulse 2s infinite alternate ease-in-out;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+/* إضافة تأثير بسيط عند تمرير الماوس فوق الشعار */
+#appLogo:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 25px rgba(255, 23, 68, 1));
+}
+
+/* =========================================
+ أنيميشن نبض الطاقة (Energy Pulse)
+ ========================================= */
+@keyframes energyPulse {
+  0% {
+    filter: drop-shadow(0 0 5px rgba(211, 47, 47, 0.2));
+  }
+  100% {
+    filter: drop-shadow(0 0 20px rgba(255, 23, 68, 0.9));
+  }
+}
+/* =========================================
+   الفوتر (حقوق النشر)
+   ========================================= */
+.app-footer {
+  margin-top: auto; /* يدفع الفوتر لأسفل الصفحة دائماً */
+  padding: 20px 0 10px 0;
+  font-size: 0.9em;
+  color: #666666; /* رمادي أنيق ومطفي */
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-align: center;
+  transition: color 0.3s ease;
+  direction: ltr; /* للحفاظ على شكل الرمز © متناسقاً */
+}
+
+.app-footer:hover {
+  color: #aaaaaa; /* يضيء قليلاً عند مرور الماوس */
+}
+
+/* تعديل بسيط للجوال */
+@media (max-width: 600px) {
+  .app-footer {
+    font-size: 0.8em;
+    padding: 15px 0 5px 0;
+  }
+}
+
+#team1, #team2 {
+    white-space: nowrap;    /* يمنع الكلمات من النزول لسطر جديد نهائياً */
+    overflow: hidden;       /* يحمي النص من الخروج عن حدود الصندوق */
+    text-overflow: ellipsis;/* يضع نقاط ... اختصاراً إذا كان الاسم أطول من الشاشة */
+}
+
+/* اختياري: تصغير حجم الخط قليلاً للأسماء الطويلة في الشاشات الصغيرة */
+@media (max-width: 480px) {
+    #team1, #team2 {
+        font-size: 0.95rem; 
+    }
+}
